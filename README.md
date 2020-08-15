@@ -1,6 +1,6 @@
 # lihat_kursus
 
-A new Flutter project.
+A new Flutter project. for IMHF
 
 ## Getting Started
 
