@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'src/DetailPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -59,7 +60,12 @@ class MyHomePage extends StatelessWidget {
                   children: <Widget>[
                     FlatButton(
                       child: const Text('DETAIL'),
-                      onPressed: () {/* ... */},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  DetailPage()));},
                     ),
                     FlatButton.icon(
                       icon: Icon(Icons.thumb_up),
