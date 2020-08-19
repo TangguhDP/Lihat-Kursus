@@ -26,6 +26,7 @@ class Courses {
   String title;
   String link;
   int votes;
+  bool isClicked = false;
   Courses(this.id, this.title, this.link, this.votes);
 }
 
@@ -44,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   static const nonActiveColor = Colors.white;
   static const activeColor = Colors.blue;
-  bool isClicked = false;
+  // bool isClicked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,25 +73,24 @@ class _MyHomePageState extends State<MyHomePage> {
                         FlatButton.icon(
                           icon: Icon(
                             Icons.thumb_up,
-                            color: isClicked == true
-                                ? activeColor
-                                : nonActiveColor,
+                            color:
+                                course.isClicked ? activeColor : nonActiveColor,
                           ),
                           label: Text(
                             'LIKE ' + course.votes.toString(),
                             style: TextStyle(
-                                color: isClicked == true
+                                color: course.isClicked == true
                                     ? activeColor
                                     : nonActiveColor),
                           ),
                           color: Colors.red[400],
                           onPressed: () {
                             setState(() {
-                              if (isClicked == false) {
-                                isClicked = true;
+                              if (course.isClicked == false) {
+                                course.isClicked = true;
                                 course.votes++;
                               } else {
-                                isClicked = false;
+                                course.isClicked = false;
                                 course.votes--;
                               }
                             });
