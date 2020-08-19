@@ -44,39 +44,35 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: new Text("Halaman Utama"),
       ),
-      body: new Container(
-        child: ListView(
-          children: coursesList.map((course) {
-            return Center(
-              child: Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ListTile(
-                      leading: Icon(Icons.book),
-                      title: Text(course.title),
-                    ),
-                    ButtonBar(
-                      children: <Widget>[
-                        FlatButton(
-                          child: const Text('DETAIL'),
-                          onPressed: () {/* ... */},
-                        ),
-                        FlatButton.icon(
-                          icon: Icon(Icons.thumb_up),
-                          label: Text('LIKE ' + course.votes.toString()),
-                          color: Colors.red[400],
-                          onPressed: () {/* ... */},
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+      body: ListView.builder(
+        itemCount: coursesList.length,
+          itemBuilder: (context, index){
+        return Center(
+          child: Card(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [ListTile(
+                leading: Icon(Icons.book),
+                title: Text(coursesList[index].title),
               ),
-            );
-          }).toList(),
-        ),
-      ),
+                ButtonBar(
+                  children: <Widget>[
+                    FlatButton(
+                      child: const Text('DETAIL'),
+                      onPressed: () {/* ... */},
+                    ),
+                    FlatButton.icon(
+                      icon: Icon(Icons.thumb_up),
+                      label: Text("LIKE"),
+                      color: Colors.red[400],
+                      onPressed: () {/* ... */},
+                    ),
+                  ],
+                )],
+            ),
+          ),
+        );
+      })
     );
   }
 }
