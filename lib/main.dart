@@ -27,58 +27,83 @@ class Courses {
   String title;
   String link;
   int votes;
-  Courses(this.id, this.title, this.link, this.votes);
+  Courses({this.id, this.title, this.link, this.votes});
 }
 
 class MyHomePage extends StatelessWidget {
-  List coursesList = [
-    Courses(1, 'Kelas Android Dasar', 'www.youtube.com', 5),
-    Courses(2, 'Kelas Android Pemula', 'www.youtube.com', 2),
-    Courses(3, 'Kelas Android Ahli', 'www.youtube.com', 3),
-    Courses(4, 'Kelas Front-End Web Dev', 'www.youtube.com', 6),
-    Courses(5, 'Kelas Back-end Golang', 'www.youtube.com', 7),
+  final List<Courses> coursesList = [
+    Courses(
+      id: 1,
+      title: "Kelas Android Dasar",
+      link: "www.youtube.com",
+      votes: 5,
+    ),
+    Courses(
+      id: 2,
+      title: "Kelas Android Pemula",
+      link: "www.youtube.com",
+      votes: 5,
+    ),
+    Courses(
+      id: 3,
+      title: "Kelas Android Ahli",
+      link: "www.youtube.com",
+      votes: 5,
+    ),
+    Courses(
+      id: 4,
+      title: "Kelas Front-End Web Dev",
+      link: "www.youtube.com",
+      votes: 5,
+    ),
+    Courses(
+      id: 5,
+      title: "Kelas Back-end Golang",
+      link: "www.youtube.com",
+      votes: 5,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: new Text("Halaman Utama"),
-      ),
-      body: ListView.builder(
-        itemCount: coursesList.length,
-          itemBuilder: (context, index){
-        return Center(
-          child: Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [ListTile(
-                leading: Icon(Icons.book),
-                title: Text(coursesList[index].title),
-              ),
-                ButtonBar(
-                  children: <Widget>[
-                    FlatButton(
-                      child: const Text('DETAIL'),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  DetailPage()));},
+        appBar: AppBar(
+          title: new Text("Halaman Utama"),
+        ),
+        body: ListView.builder(
+            itemCount: coursesList.length,
+            itemBuilder: (context, index){
+              return Center(
+                child: Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [ListTile(
+                      leading: Icon(Icons.book),
+                      title: Text(coursesList[index].title),
                     ),
-                    FlatButton.icon(
-                      icon: Icon(Icons.thumb_up),
-                      label: Text("LIKE"),
-                      color: Colors.red[400],
-                      onPressed: () {/* ... */},
-                    ),
-                  ],
-                )],
-            ),
-          ),
-        );
-      })
+                      ButtonBar(
+                        children: <Widget>[
+                          FlatButton(
+                            child: const Text('DETAIL'),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          DetailPage()));},
+                          ),
+                          FlatButton.icon(
+                            icon: Icon(Icons.thumb_up),
+                            label: Text("LIKE"),
+                            color: Colors.red[400],
+                            onPressed: () {/* ... */},
+                          ),
+                        ],
+                      )],
+                  ),
+                ),
+              );
+            })
     );
   }
 }
