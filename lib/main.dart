@@ -22,41 +22,41 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Courses {
-  int id;
-  String title;
-  String link;
-  int votes;
-  Courses({this.id, this.title, this.link, this.votes});
+class Course {
+  final int id;
+  final String title;
+  final String link;
+  final int votes;
+  Course({this.id, this.title, this.link, this.votes});
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Courses> coursesList = [
-    Courses(
+  final List<Course> courses = [
+    Course(
       id: 1,
       title: "Kelas Android Dasar",
       link: "www.youtube.com",
       votes: 5,
     ),
-    Courses(
+    Course(
       id: 2,
       title: "Kelas Android Pemula",
       link: "www.youtube.com",
       votes: 5,
     ),
-    Courses(
+    Course(
       id: 3,
       title: "Kelas Android Ahli",
       link: "www.youtube.com",
       votes: 5,
     ),
-    Courses(
+    Course(
       id: 4,
       title: "Kelas Front-End Web Dev",
       link: "www.youtube.com",
       votes: 5,
     ),
-    Courses(
+    Course(
       id: 5,
       title: "Kelas Back-end Golang",
       link: "www.youtube.com",
@@ -71,7 +71,7 @@ class MyHomePage extends StatelessWidget {
           title: new Text("Halaman Utama"),
         ),
         body: ListView.builder(
-            itemCount: coursesList.length,
+            itemCount: courses.length,
             itemBuilder: (context, index){
               return Center(
                 child: Card(
@@ -79,7 +79,7 @@ class MyHomePage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [ListTile(
                       leading: Icon(Icons.book),
-                      title: Text(coursesList[index].title),
+                      title: Text(courses[index].title),
                     ),
                       ButtonBar(
                         children: <Widget>[
@@ -89,8 +89,8 @@ class MyHomePage extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          DetailPage()));},
+                                      builder: (context) =>
+                                          DetailPage(course: courses[index])));},
                           ),
                           FlatButton.icon(
                             icon: Icon(Icons.thumb_up),
