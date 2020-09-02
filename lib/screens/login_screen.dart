@@ -64,7 +64,9 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(55),
                 child: GoogleSignInButton(
                   borderRadius: 8,
-                  onPressed: () {},
+                  onPressed: () {
+                    //Login function with firebase
+                  },
                 ),
               ),
             ),
