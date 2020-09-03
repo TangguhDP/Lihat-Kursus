@@ -1,12 +1,48 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:lihat_kursus/animation/fadeanimation.dart';
 import 'package:lihat_kursus/constants.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:lihat_kursus/screens/home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   static String id = "login_screen";
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  Future<User> _handleSignIn() async {
+    User user;
+
+    bool isSignedIn = await _googleSignIn.isSignedIn();
+
+    if (isSignedIn) {
+      user = _auth.currentUser;
+    } else {
+      final GoogleSignInAccount googleSignInAccount =
+          await _googleSignIn.signIn();
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleSignInAccount.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+
+      user = (await _auth.signInWithCredential(credential)).user;
+    }
+
+    return user;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +65,9 @@ class LoginScreen extends StatelessWidget {
                         top: 35,
                       ),
                       child: TypewriterAnimatedTextKit(
-                        text: ['LIHAT\nKURSUS'],
+                        text: ['LIHAT KURSUS'],
                         textStyle: kTextStyleFredoka,
-                        speed: Duration(milliseconds: 600),
+                        speed: Duration(milliseconds: 550),
                         isRepeatingAnimation: false,
                         totalRepeatCount: 0,
                       ),
@@ -39,17 +75,23 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Image.asset('assets/images/vektor.png'),
+                    FadeAnimation(
+                      delay: 1,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Image.asset('assets/images/vektor.png'),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 30.0),
-                      child: Text(
-                        "Merekomendasikan kursus terbaik\nlebih dari 100k pengguna",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontFamily: 'Raleway',
+                      child: FadeAnimation(
+                        delay: 1.2,
+                        child: Text(
+                          "Merekomendasikan kursus terbaik\nlebih dari 100k pengguna",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: 'Raleway',
+                          ),
                         ),
                       ),
                     ),
@@ -64,8 +106,16 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(55),
                 child: GoogleSignInButton(
                   borderRadius: 8,
-                  onPressed: () {
-                    //Login function with firebase
+                  onPressed: () async {
+                    // login function with firebase
+                    try {
+                      final User user = await _handleSignIn();
+                      if (user != null) {
+                        Navigator.pushNamed(context, HomeScreen.id);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
                   },
                 ),
               ),

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lihat_kursus/constants.dart';
-import 'package:lihat_kursus/screens/home_screen.dart';
 import 'package:lihat_kursus/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -47,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen>
   Future<dynamic> startSplashScreen() async {
     var duration = Duration(seconds: 1);
     return Timer(duration, () {
-      Navigator.pushNamed(context, LoginScreen.id);
+      Navigator.popAndPushNamed(context, LoginScreen.id);
     });
   }
 
