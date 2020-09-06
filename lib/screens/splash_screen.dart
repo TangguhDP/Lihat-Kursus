@@ -18,7 +18,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
@@ -33,14 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (status == AnimationStatus.completed) {
         startSplashScreen();
       }
-//        Navigator.pushNamed(context, LoginScreen.id);
     });
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
   }
 
   Future<dynamic> startSplashScreen() async {
