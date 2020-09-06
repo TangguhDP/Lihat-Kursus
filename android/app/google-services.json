@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "278482020559",
+    "firebase_url": "https://lihat-kursus.firebaseio.com",
+    "project_id": "lihat-kursus",
+    "storage_bucket": "lihat-kursus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278482020559:android:03d78f1b850202c6176fba",
+        "android_client_info": {
+          "package_name": "com.example.lihat_kursus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278482020559-ntt8vp2i832jd46mt2g8sc3kjfte6bga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5UHe2PhpNOIF59sud3ZvDYQoyUP9jFoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278482020559-ntt8vp2i832jd46mt2g8sc3kjfte6bga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
